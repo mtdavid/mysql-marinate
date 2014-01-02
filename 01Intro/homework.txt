@@ -13,7 +13,7 @@ mkxemw
 
 Do not forget to finish this week's homework - edit this file and put the
 name you use on meetup.com into this file:
-David Simpson
+(your name here)
 
 Do not forget to do a pull request when your homework is complete. 
 How to submit homework:
