@@ -2,19 +2,38 @@ Homework for Chapter 2 of Learning MySQL (2006 edition), from p. 94:
 
 Exercises:
 1) What is command completion?
+   Some sort of command line thing.  Nothing useful for us gui users.  :-)
 
 2) What are the relative advantages of installing MySQL using the package,
  directory archive (tarball or "no-install"), or compiled methods?
-
+   Package?  Tarball??  Is this some Linux-speak?  I'm a non-Command Prompt Windows guy.  
+   
 3) How do you verify the integrity of downloaded packages?
+   Verify the MD5 checksums match.
+   Downloaded nullriver's winmd5sum program, but didn't use it for WAMP install.
 
 4) How do you add the MySQL bin directory to the operating system path?
+   1) Click Start button, right-click on Computer and click Properties.
+   2) In the System Properties window, click on the Advanced tab.  (Say Yes to User Access Control pop-up.)
+   3) In the Advanced section, click the Environment Variables button.
+   4) In System variables section scroll down, highlight the Path variable, and click the Edit button. 
+      Add the mysql.exe directory to the Path
+
 
 Additional Exercises (not in the book): 
 1) Document how you installed MySQL and any issues you came across with installation. 
- (The goal is to be easy to install it again on a similar machine.)
+   (The goal is to be easy to install it again on a similar machine.)
+   I installed Apache, PHP, & MySQL using WAMP -- not covered in the Learning MySQL text book.
+   I ran into one problem... I didn't copy down the root password on initial install so I had to uninstall/reinstall.
 
 2) Document where important files should be.
+   C:wamp\wampmanager.exe
+   C:wamp\bin\apache\Apache2.4.4\conf\httpd.conf
+   C:wamp\bin\mysql\mysql5.6.12\my.ini
+   C:wamp\bin\php\php5.4.16\php.ini
+   
+
+
 
 Do not forget to do a pull request when your homework is complete.
-http://www.meetup.com/Virtual-Tech-Self-Study/messages/boards/thread/29963152/
+http://www.meetup.com/Virtual-Tech-Self-Study/messages/boards/thread/38423282
