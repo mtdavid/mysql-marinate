@@ -1,9 +1,27 @@
-1. What do we mean when we say that MySQL has a client-server architecture?
+﻿1. What do we mean when we say that MySQL has a client-server architecture?
+	The MySQL database(s) reside on a Server and client applications access the database(s) 
+	to perform database operations such as reading and storing information.
+
 
 2. Use the monitor help to look up information on the SELECT statement. (We’ll discuss SELECT in detail in Chapter 5.)
+	Either help SELECT or
+	help Data Manipulation --> help SELECT
 
-3. What is the difference between using the monitor in interactive mode and using
-the monitor in batch mode?
+
+3. What is the difference between using the monitor in interactive mode and usingthe monitor in batch mode?
+	In interactive mode commands are typed directly into the monitor itself and executed interactively.
+	In batch mode commands are placed in a file and stored for later execution.  The "SOURCE" command is used 
+		to execute the sql stored in the  file.
+
 
 4. What do the monitor user, password, and database options do?
+	These are Monitor program start-up options
+		user: specifies the user name the Monitor will use to connect to the MySQL server
+		password: at MySQL cerver set-up, if the above user was given a password, it can be provided as an 
+			  option at Monitor start-up.  (If a password was provided and if it is not provided as a
+			  Monitor start-up option, the Monitor will ask for the password before allowing use of the
+			  Monitor.)
+		database: tells the Monitor which database on the MySQL server to use without the need for the Monitor
+			  user to specify it in a USE command.
+
 
