@@ -1,83 +1,26 @@
-﻿Let's try this again...
+﻿Reworked based on Sheeri feedback...
 
 1. When would you use a weak entity?
 
-     (I've hung around a lot of data geeks in my time, but I never heard anyone talk about strong & weak entities.)
-     It appearrs an entity is considered weak when it needs a relationship with another entity to provide context and 
-         that "identifying relationship" must exist - (must be a one-to-one relationship with it's parent entity).
+     An entity is considered weak when it cannot exist without having a relationship with another entity.  This 
+         relationship provides context for the weak entity.
 
 
 2. Is it better to use entities instead of attributes?
 
-     Better?  This is a strange question as it really depends on the "thing" we're talking about.  If the thing is of 
-     interest to the database, has components of it's own, or has multiple instances to be tracked, then it's an entity.  
-     Otherwise it's an attribute.  (Each is only "better" when it's used correctly.) 
+     If the thing is of interest to the database, has components of it's own, or has multiple instances to be 
+         tracked, then it's an entity.  Otherwise it's an attribute.
 
 
 3. Alter and extend the music database ER model so that it can store compilations, where a compilation is an album 
    that contains tracks by two or more different artists. Explain what you changed and why.
 
-     See Diagram4_11.jpg file
-        - ERDs created using MS Visio
+     The "Diagram4_11.jpg" file in 04ModelDesign has been updated with my Music model
+        
      
 
 4. Create an ER diagram for an online media store and explain your choices (e.g. why did you make X an entity and Y a relationship) using the following requirements:
  
-     See Diagram4_11.odg file
+     The "Diagram4_11.odg" file in 04ModelDesign has been updated with my MediaStore model
 
 
- - There are two types of product: music CDs and video DVDs.
- - Customers can buy any number of each product.
- - For each CD, store the title, the artist’s name, the label (publisher), 
-   and the price. Also store the number, title, and length (in seconds) 
-   of each track on the CD.
- - For each video DVD, store the title the studio name, and the price.
-
-Tables 4-1 and 4-2 contain some sample data to help you better understand 
-the requirements.
-
-Table 4-1. Video DVDs
-Title			Studio			Price
-Leon—The Professional	Sony Pictures		$21.99
-Chicken Run		Dreamworks Video	$19.99
-
-Table 4-2. Music CDs
-Title	Artist	Label	Price
-Come Away With Me	Norah Jones	Blue Note Records	$11.99
-Feels Like Home		Norah Jones	Blue Note Records	$11.99
-The Joshua Tree		U2		Island			$10.99
-Brothers in Arms	Dire Straits 	Vertigo			 $9.99
-
-Table 4-3 contains a sample list of music CD track titles and length in 
-seconds for the CD with the title “Come Away With Me” by the artist 
-Norah Jones.
-
-Table 4-3. Tracks
-Number	Name				Length
-1	Don’t Know Why			186
-2	Seven Years			145
-3	Cold, Cold Heart		218
-4	Feelin’ the Same Way		177
-5	Come Away with Me		198
-6	Shoot the Moon			236
-7	Turn Me On			154
-8	Lonestar			186
-9	I’ve Got to See You Again 	253
-10	Painter Song			162
-11	One Flight Down			185
-12	Nightingale			252
-13	The Long Day Is Over		164
-14	The Nearness of You		187
-
-If you are using Visio, Mike Murphy points out that there is a stencil by 
-Daniel Harris that worked for him at 
-http://www.visiocafe.com/downloads/various/DanielHarris/Chen_ER.zip
-
-This directory also contains a Diagram4_11.odg file with Diagram 4-11, for use in question 3, and
-as a model for question 4.
-The .odg file was created on Open Office, but all compatibile programs can be seen at:
-http://www.fileinfo.com/extension/odg
-
-Or you can just hand-draw diagrams for questions 3 and 4 and take a picture, as in the Diagram4_11.jpg file.
-
-DO NOT USE MySQL Workbench for these diagrams. Those are not true E-R diagrams with proper symbols and notation.
