@@ -39,9 +39,7 @@ WHERE T.album_id = (SELECT Al.album_id
 
 
 
-
 2) Using a join, list the albums that we own by the band New Order
-
 
 SELECT album_name
 
@@ -49,8 +47,6 @@ FROM album Al
 INNER JOIN artist A ON (Al.artist_id = A.artist_id)
  
 WHERE A.artist_name = "New Order";
-
-
 
 
 3) With INSERT statements, add the artist Leftfield to the database. 
