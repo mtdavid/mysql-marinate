@@ -1,32 +1,145 @@
-Chapter 6 Homework
+﻿Chapter 6 Homework
 
 All exercises here concern the music database. 
 
-1. You’ve decided to store more information about artists and albums. Specifically,
-for artists, you want to store the names of people who have worked with the artist
+1. You’ve decided to store more information about artists and albums. 
+
+Specifically, for artists, you want to store the names of people who have worked with the artist
 (for example, vocalists, guitarists, trumpeters, and drummers), when they began
 working with the artist, and when they stopped working with the artist (if they
 have done so).
 
 For albums, you want to store the name of the album producer, when the album
-was released, and where the album was recorded. Design tables or columns that
-can store this information, and explain the advantages and disadvantages of your
-design. Choose the column types you need, explaining the advantages and disad-
-vantages of your choices.
+was released, and where the album was recorded. 
+
+Design tables or columns that can store this information, and explain the advantages and 
+disadvantages of your design. Choose the column types you need, explaining the advantages 
+and disadvantages of your choices.
+
+	ALTER TABLE artist
+
+		ADD supporting_artist_name CHAR(128),
+
+		ADD supporting_artist_start_date DATE,
+
+		ADD supporting_artist_end_date DATE; 
+	
+	I used the "supporting_artist" prefix for identify what is basically a relationship between two 
+	artists.  Advantages: quick and easy to implement.  Disadvantages: duplicate data if a
+        supporting artist him/herself is listed in the artist table or if the supporting artist assists 
+	multiple artists.
+
+	I used CHAR(128) because it is the same data type as the artist.artist_name column and provides 
+	a level of consistancy.  I used DATE because the requirement did not state a greater level of 
+	percision was needed. 
+
+	In a production environment I would not have done this.  I would have created an intersection entity 
+	between the artist table allowing for a recursive many-to-many relationship between artists.  The 
+	intersection table would have had at least 5 columns: a unique id (because the supporting artist may 
+	have ended a relationship at some point and reestablished subsequent supporting relationships); a 
+	foreign key relationship to the artist.artist_id of the artist being supported; a foreign key 
+	relationship to the artist.artist_id of the artist providing the support; the relationship start 
+	date; and, the reationship end date.   
+
+	------------------------------------------------------------------------------------------------------
+
+	ALTER TABLE album
+
+		ADD producer_name CHAR(128),
+
+		ADD release_date DATE,
+
+		ADD recording_location VARCHAR(255); 
+
+	I added 3 columns to the album table.  Advantages: also very quick and easy to implement.  
+	Disadvantages: duplicate data if a person produces multiple albums.
+
+	I used CHAR(128) as this is the data type used throughout the database for "name" columns.  I used 
+	DATE because the requirement did not state a greater level of percision was needed.  I used VARCHAR 
+	for the recording location as the length of this string field could vary greatly -- using CHAR would 
+	require all recoding locations to use all 255 characters of space and, while the VARCHAR data type
+	incurs a 1 to 2 byte overhead to store the string length, it only stores the actual length of the 
+	recording location text.  
+
+	Again, in a production environment I would not have done this.  Creation of a "producer" table would
+	seem to fit the current music database design, with a foreign key relationship between album and 
+	producer.  However, with the introduction of another person into the database, I would probably have: 
+	replaced the "artist" table with a "person" table and added a "producer_id" to the album table with a 
+	foreign key relationship between person and album.
+
 
 2. There are five types for storing temporal data: DATETIME, DATE, TIME, YEAR, and
 TIMESTAMP. Explain what each is used for, and give an example of a situation in
 which you would choose to use it. Note that http://palominodb.com/blog/2011/05/23/datetime-vs-timestamp
 has some useful information too.
 
-3. You’ve decided to use the AUTO_INCREMENT feature. List the three requirements that
-must be met by the column you’re applying it to.
+	DATETIME
+	- Used when it is necessary to store both the date and time.  Date/time is stored and displayed in the 
+	  format "YYYY-MM-DD HH:MM:SS".  The earliest date storable is 1000-01-01 00:00:00, the latest date 
+	  storable is 9999-12-31 23:59:59.  If only an date is input, zero time (00:00:00) is assumed.  If only 
+	  a time is input, zero date (0000-00-00) is assumed.  It takes 8 bytes to store DATETIME.  
+
+	DATE
+	- Used when only date (not date/time or time) is needed.  It is stored in the format YYYY-MM-DD.  It 
+	  uses the same range as DATETIME. DATE can be set to the zero date and if any invalid date (like 
+	  2014-09-31) is input, the zero date is stored.   
+
+	TIME
+	- Can be used when only a time of day is needed (18:05:22), or when an elapsed time or time interval 
+	  (max up to 34 days, 22 hours, 59 minutes, and 59 seconds) is needed.  It is stored in the format 
+	  HHH:MM:SS and stored in the range of -838:59:59 to +838:59:59.  if any invalid time (like 25:01:01) 
+	  is input, the zero time is stored.  
+
+	YEAR
+	- Used only when a year value is needed.  It can be declared as YEAR(4) or YEAR(2) to specify a display 
+	  width of 4 or 2 digits - default is 4 if definition is just YEAR.  It is stored in the range of 1901 
+	  to 2155.  If a year outside this range is input, YEAR is set to 0000.  
+
+	TIMESTAMP
+	- Also stores date and time in the format "YYYY-MM-DD HH:MM:SS".  It stores date/time in the range of
+	  1970-01-01 00:00:01 to 2038-01-19 03:14:07. It is stored in UTC, based of the time zone of the system
+	  time zone.  When displayed it is converted by MySQL back to your system time zone.  It can be set to 
+	  automatic update to the current date/time.  It is stored as an integer as number of seconds from the 
+	  start of the range.  It is calculated once per statement execution.  
+
+
+
+3. You’ve decided to use the AUTO_INCREMENT feature. List the three requirements that must be met by the 
+   column you’re applying it to.
+
+	- the column it is used on must be indexed
+	- the column it is used on cannot have a DEFAULT value
+	- there can only be one AUTO_INCREMENT column per table
+
+
 
 4. Why can only one column in a table have the AUTO_INCREMENT feature?
 
+	- I cannot find the answer to this question.  What is it about the MySql product that is forcing us 
+	  to use auto increment only once per table?  Is it something in that way MySQL stores the increment
+	  value?  I think from a business perspective there could be a need for multiple auto-incremented columns. 
+
+
+
 5. Using the monitor, create a table with the following statement:
-mysql> CREATE TABLE exercise (field1 INT(3));
-Using the ALTER TABLE statement, make field1 the primary key, carrying out any
-additional steps you need to make this possible. Add a second column, field2, of
-type CHAR(64) with a DEFAULT 5 clause. Create an index on a prefix of 10 characters
-from field2.
+	mysql> CREATE TABLE exercise (field1 INT(3));
+	
+	Query OK, 0 rows affected (0.63 sec)
+
+
+   Using the ALTER TABLE statement: 
+	make field1 the primary key, carrying out any additional steps you need to make this possible
+	add a second column, field2, of type CHAR(64) with a DEFAULT 5 clause
+	create an index on a prefix of 10 characters from field2.
+
+	ALTER TABLE exercise
+	
+	MODIFY field1 int(3) NOT NULL UNIQUE,
+
+		ADD PRIMARY KEY (field1),
+
+		ADD field2 CHAR(64) NOT NULL DEFAULT 5,
+
+		ADD INDEX by_field2 (field2(10));
+
+
